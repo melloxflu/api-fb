@@ -9,103 +9,39 @@
     
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
-        
         body { 
             background: linear-gradient(135deg, #0b0f19 0%, #111827 100%);
-            color: #e2e8f0; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            min-height: 100vh; 
-            padding: 20px; 
+            color: #e2e8f0; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; 
         }
-
         .container { 
-            background: rgba(30, 41, 59, 0.7); 
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 35px 25px; 
-            border-radius: 20px; 
-            width: 100%; 
-            max-width: 450px; 
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-            text-align: center;
+            background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 35px 25px; border-radius: 20px; width: 100%; max-width: 450px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6); text-align: center;
         }
-
-        .icon-header {
-            font-size: 45px;
-            color: #1877F2;
-            margin-bottom: 10px;
-            text-shadow: 0 0 20px rgba(24, 119, 242, 0.4);
-        }
-
+        .icon-header { font-size: 45px; color: #1877F2; margin-bottom: 10px; text-shadow: 0 0 20px rgba(24, 119, 242, 0.4); }
         h1 { font-size: 22px; font-weight: 700; margin-bottom: 5px; color: #fff; }
         p.subtitle { font-size: 13px; color: #94a3b8; margin-bottom: 25px; }
-
         .input-group { position: relative; margin-bottom: 20px; text-align: left; }
         .input-group i { position: absolute; left: 15px; top: 16px; color: #64748b; }
         input { 
-            width: 100%; 
-            padding: 15px 15px 15px 45px; 
-            border-radius: 12px; 
-            border: 1px solid #334155; 
-            background: #0f172a; 
-            color: #fff; 
-            outline: none; 
-            font-size: 14px;
-            transition: 0.3s;
+            width: 100%; padding: 15px 15px 15px 45px; border-radius: 12px; border: 1px solid #334155; 
+            background: #0f172a; color: #fff; outline: none; font-size: 14px; transition: 0.3s;
         }
         input:focus { border-color: #1877F2; box-shadow: 0 0 0 3px rgba(24, 119, 242, 0.2); }
-
         button { 
-            width: 100%; 
-            padding: 14px; 
-            background: linear-gradient(135deg, #1877F2 0%, #165ecf 100%); 
-            color: #fff; 
-            border: none; 
-            border-radius: 12px; 
-            font-weight: 700; 
-            font-size: 15px;
-            cursor: pointer; 
-            transition: 0.3s; 
-            box-shadow: 0 8px 20px rgba(24, 119, 242, 0.3);
+            width: 100%; padding: 14px; background: linear-gradient(135deg, #1877F2 0%, #165ecf 100%); 
+            color: #fff; border: none; border-radius: 12px; font-weight: 700; font-size: 15px; cursor: pointer; 
+            transition: 0.3s; box-shadow: 0 8px 20px rgba(24, 119, 242, 0.3);
         }
-        button:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(24, 119, 242, 0.4); }
-        button:disabled { background: #475569; box-shadow: none; transform: none; cursor: not-allowed; }
-
+        button:disabled { background: #475569; cursor: not-allowed; box-shadow: none; }
         #result { margin-top: 25px; display: none; text-align: left; }
-        
-        .video-wrapper { 
-            position: relative; 
-            width: 100%; 
-            border-radius: 12px; 
-            overflow: hidden; 
-            background: #000; 
-            margin-bottom: 15px;
-            border: 1px solid #334155;
-        }
+        .video-wrapper { position: relative; width: 100%; border-radius: 12px; overflow: hidden; background: #000; margin-bottom: 15px; border: 1px solid #334155; }
         video { width: 100%; display: block; max-height: 250px; object-fit: contain; }
-        
-        .video-title { font-size: 14px; font-weight: 600; margin-bottom: 15px; color: #f1f5f9; line-height: 1.4; }
-
         .download-actions { display: flex; flex-direction: column; gap: 10px; }
         .download-btn { 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 12px; 
-            background: #10b981;
-            color: #fff; 
-            text-decoration: none; 
-            border-radius: 10px; 
-            font-weight: 600; 
-            font-size: 14px;
-            transition: 0.3s; 
+            display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; 
+            background: #10b981; color: #fff; text-decoration: none; border-radius: 10px; font-weight: 600; font-size: 14px; transition: 0.3s; 
         }
         .download-btn.sd { background: #3b82f6; }
-        .download-btn:hover { opacity: 0.9; transform: scale(0.98); }
-
         .error { color: #ef4444; background: rgba(239, 68, 68, 0.1); padding: 10px; border-radius: 8px; margin-top: 15px; font-size: 13px; display: none; }
         .loading { color: #eab308; margin-top: 15px; font-size: 14px; display: none; }
         .loading i { animation: spin 1s linear infinite; }
@@ -116,12 +52,12 @@
 
     <div class="container">
         <i class="fa-brands fa-facebook icon-header"></i>
-        <h1>FB Video Downloader</h1>
-        <p class="subtitle">Download video & reels kualitas HD gratis</p>
+        <h1>FB Downloader</h1>
+        <p class="subtitle">Download video & reels kualitas HD</p>
         
         <div class="input-group">
             <i class="fa-solid fa-link"></i>
-            <input type="text" id="fbUrl" placeholder="Paste link Facebook di sini...">
+            <input type="text" id="fbUrl" placeholder="Paste link Facebook (share/reel/watch)...">
         </div>
         
         <button id="btnDownload" onclick="downloadVideo()">
@@ -135,15 +71,11 @@
             <div class="video-wrapper">
                 <video id="videoPreview" controls playsinline></video>
             </div>
-            <div class="video-title" id="videoTitle"></div>
             <div class="download-actions" id="downloadLinks"></div>
         </div>
     </div>
 
     <script>
-        // LINK VERCEL LO UDAH DI-PASANG DI SINI
-        const API_URL = 'https://api-fb3.vercel.app'; 
-
         async function downloadVideo() {
             const url = document.getElementById('fbUrl').value.trim();
             const btn = document.getElementById('btnDownload');
@@ -151,10 +83,8 @@
             const result = document.getElementById('result');
             const errorDiv = document.getElementById('error');
             const videoPreview = document.getElementById('videoPreview');
-            const videoTitle = document.getElementById('videoTitle');
             const downloadLinks = document.getElementById('downloadLinks');
 
-            // Reset Tampilan
             result.style.display = 'none';
             errorDiv.style.display = 'none';
             videoPreview.src = '';
@@ -166,53 +96,48 @@
                 return;
             }
 
-            // Cegah link share
-            if (url.includes('/share/')) {
-                errorDiv.innerText = 'Jangan pakai link Share. Buka video FB, klik titik 3, pilih "Copy Link", lalu paste di sini.';
-                errorDiv.style.display = 'block';
-                return;
-            }
-
             btn.disabled = true;
             loading.style.display = 'block';
 
             try {
-                // Tembak ke API Node.js lu
-                const res = await fetch(`${API_URL}/api/fb`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ url: url })
-                });
+                // Kita pakai API publik yang nge-handle link share FB
+                // API ini mengembalikan JSON berisi link download
+                const apiUrl = `https://api.vevioz.com/api/button/mp4/${encodeURIComponent(url)}`;
+                const proxy = 'https://api.allorigins.win/raw?url=';
                 
-                const data = await res.json();
+                const res = await fetch(proxy + encodeURIComponent(apiUrl));
+                const htmlText = await res.text();
+
+                // Ekstrak link MP4 dari respon HTML API
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(htmlText, 'text/html');
                 
-                if (!data.success) {
-                    throw new Error(data.error || 'Gagal mengambil video. Pastikan video publik.');
+                let videoUrl = null;
+                const links = doc.querySelectorAll('a');
+                for (let a of links) {
+                    if (a.href && a.href.includes('.mp4')) {
+                        videoUrl = a.href;
+                        break;
+                    }
                 }
 
-                // Set judul
-                videoTitle.innerText = data.data.title || 'Video Facebook Tanpa Judul';
-
-                // Ambil link media
-                const media = data.data.media;
-                const hdLink = media.hd;
-                const sdLink = media.sd;
-
-                if (hdLink || sdLink) {
-                    // Set video player pakai HD kalo ada
-                    videoPreview.src = hdLink || sdLink;
-                    
-                    // Render tombol download
-                    if (hdLink) {
-                        downloadLinks.innerHTML += `<a href="${hdLink}" class="download-btn" target="_blank"><i class="fa-solid fa-download"></i> Download HD</a>`;
-                    }
-                    if (sdLink) {
-                        downloadLinks.innerHTML += `<a href="${sdLink}" class="download-btn sd" target="_blank"><i class="fa-solid fa-download"></i> Download SD</a>`;
-                    }
-                    
+                if (videoUrl) {
+                    videoPreview.src = videoUrl;
+                    downloadLinks.innerHTML = `<a href="${videoUrl}" class="download-btn" target="_blank"><i class="fa-solid fa-download"></i> Download Video</a>`;
                     result.style.display = 'block';
                 } else {
-                    throw new Error("Link video tidak ditemukan di dalam postingan.");
+                    // Fallback: pakai API lain kalau vevioz gagal
+                    const fallbackApi = `https://api.downloadgram.com/api/fb?url=${encodeURIComponent(url)}`;
+                    const fbRes = await fetch(fallbackApi);
+                    const fbData = await fbRes.json();
+                    
+                    if(fbData.url) {
+                         videoPreview.src = fbData.url;
+                         downloadLinks.innerHTML = `<a href="${fbData.url}" class="download-btn" target="_blank">Download Video</a>`;
+                         result.style.display = 'block';
+                    } else {
+                         throw new Error("Gagal mengekstrak link. Coba lagi nanti.");
+                    }
                 }
 
             } catch (err) {
