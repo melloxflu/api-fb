@@ -3,16 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FB Downloader Premium</title>
-    <!-- FontAwesome buat ikon -->
+    <title>FB Downloader</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
         
-        /* Background Gradient Gelap */
         body { 
             background: linear-gradient(135deg, #0b0f19 0%, #111827 100%);
             color: #e2e8f0; 
@@ -23,7 +20,6 @@
             padding: 20px; 
         }
 
-        /* Card Glassmorphism */
         .container { 
             background: rgba(30, 41, 59, 0.7); 
             backdrop-filter: blur(12px);
@@ -36,7 +32,6 @@
             text-align: center;
         }
 
-        /* Ikon Facebook di atas */
         .icon-header {
             font-size: 45px;
             color: #1877F2;
@@ -47,7 +42,6 @@
         h1 { font-size: 22px; font-weight: 700; margin-bottom: 5px; color: #fff; }
         p.subtitle { font-size: 13px; color: #94a3b8; margin-bottom: 25px; }
 
-        /* Input Form */
         .input-group { position: relative; margin-bottom: 20px; text-align: left; }
         .input-group i { position: absolute; left: 15px; top: 16px; color: #64748b; }
         input { 
@@ -63,7 +57,6 @@
         }
         input:focus { border-color: #1877F2; box-shadow: 0 0 0 3px rgba(24, 119, 242, 0.2); }
 
-        /* Tombol Utama */
         button { 
             width: 100%; 
             padding: 14px; 
@@ -80,7 +73,6 @@
         button:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(24, 119, 242, 0.4); }
         button:disabled { background: #475569; box-shadow: none; transform: none; cursor: not-allowed; }
 
-        /* Area Hasil Video */
         #result { margin-top: 25px; display: none; text-align: left; }
         
         .video-wrapper { 
@@ -96,7 +88,6 @@
         
         .video-title { font-size: 14px; font-weight: 600; margin-bottom: 15px; color: #f1f5f9; line-height: 1.4; }
 
-        /* Tombol Download */
         .download-actions { display: flex; flex-direction: column; gap: 10px; }
         .download-btn { 
             display: flex;
@@ -104,7 +95,7 @@
             justify-content: center;
             gap: 8px;
             padding: 12px; 
-            background: #10b981; /* Hijau */ 
+            background: #10b981;
             color: #fff; 
             text-decoration: none; 
             border-radius: 10px; 
@@ -112,10 +103,9 @@
             font-size: 14px;
             transition: 0.3s; 
         }
-        .download-btn.sd { background: #3b82f6; /* Biru */ }
+        .download-btn.sd { background: #3b82f6; }
         .download-btn:hover { opacity: 0.9; transform: scale(0.98); }
 
-        /* Notifikasi & Loading */
         .error { color: #ef4444; background: rgba(239, 68, 68, 0.1); padding: 10px; border-radius: 8px; margin-top: 15px; font-size: 13px; display: none; }
         .loading { color: #eab308; margin-top: 15px; font-size: 14px; display: none; }
         .loading i { animation: spin 1s linear infinite; }
@@ -151,8 +141,8 @@
     </div>
 
     <script>
-        // --- GANTI URL INI DENGAN LINK VERCEL api-fb LO NANTI ---
-        const API_URL = 'https://api-fb.vercel.app'; 
+        // LINK VERCEL LO UDAH DI-PASANG DI SINI
+        const API_URL = 'https://api-fb3.vercel.app'; 
 
         async function downloadVideo() {
             const url = document.getElementById('fbUrl').value.trim();
@@ -176,6 +166,13 @@
                 return;
             }
 
+            // Cegah link share
+            if (url.includes('/share/')) {
+                errorDiv.innerText = 'Jangan pakai link Share. Buka video FB, klik titik 3, pilih "Copy Link", lalu paste di sini.';
+                errorDiv.style.display = 'block';
+                return;
+            }
+
             btn.disabled = true;
             loading.style.display = 'block';
 
@@ -190,7 +187,7 @@
                 const data = await res.json();
                 
                 if (!data.success) {
-                    throw new Error(data.error || 'Gagal mengambil video. Pastikan link publik.');
+                    throw new Error(data.error || 'Gagal mengambil video. Pastikan video publik.');
                 }
 
                 // Set judul
@@ -228,4 +225,4 @@
         }
     </script>
 </body>
-  </html>
+</html>
